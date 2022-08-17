@@ -1,19 +1,13 @@
-const CATEGORYPRODUCTS = "https://japceibal.github.io/emercado-api/cats_products/101.json";
-let currentProductsArray = [];
+const CATEGORYPRODUCTS =
+  "https://japceibal.github.io/emercado-api/cats_products/101.json";
 
-fetch(CATEGORYPRODUCTS)
+function showProductsList(productArray) {
+  let htmlContentToAppend = "";
 
-.then(response => response.json())
-.then (data => showProductsList(data))
-.catch(error => console.log(error))
+  document.getElementById("catproduct").innerHTML += " " + productArray.products.catName;
 
-function showProductsList(data){
-let htmlContentToAppend = "";
-
-document.getElementById("catproduct").innerHTML += " " + data.catName;
-
-for(let i = 0; i < data.products.length; i++){
-    let product = data.products[i];
+  for (let i = 0; i < productArray.products.length; i++) {
+    let product = productArray.products[i];
 
     htmlContentToAppend = `
     <div onclick="setCatID(${product.id})" class="list-group-item list-group-item-action cursor-active">
@@ -30,11 +24,16 @@ for(let i = 0; i < data.products.length; i++){
             </div>
         </div>
     </div>
-    `
-    document.getElementById("product-list-container").innerHTML += htmlContentToAppend;
-}
+    `;
+    document.getElementById("product-list-container").innerHTML +=
+      htmlContentToAppend;
+  }
 }
 
-document.addEventListener('DOMContentLoaded', ()=>{
-    showProductsList();
+document.addEventListener("DOMContentLoaded", () => {
+  getJSONData(CATEGORYPRODUCTS).then(function (resultObj) {
+    if (resultObj.status === "ok") {
+      showProductsList(resultObj.data);
+    }
+  });
 });
