@@ -17,12 +17,19 @@ function login() {
     document.getElementById("contra").classList.remove("border-dark");
     document.getElementById("contra").classList.add("border-danger");
   } else {
-    localStorage.setItem("user",email);
+    sessionStorage.setItem("user",email);
     location.href = "index.html";
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: 'Por favor inicie sesion para navegar por la pagina.'
+  })
+
   document.getElementById("email").addEventListener("click", () => {
     document.getElementById("email").value = "";
   });
