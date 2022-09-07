@@ -3,6 +3,11 @@ function setNameOfCategory(cate){
   document.getElementById("catproduct").innerHTML += " " + cate.catName;
 }
 
+function setProdID(id){
+  localStorage.setItem("prodID",id);
+  window.location = "product-info.html"
+}
+
 function showProductsList(productArray) {
   let htmlContentToAppend = "";
 
@@ -10,7 +15,7 @@ function showProductsList(productArray) {
     let product = productArray[i];
 
     htmlContentToAppend += `
-    <div onclick="setCatID(${product.id})" class="element list-group-item list-group-item-action cursor-active">
+    <div onclick="setProdID(${product.id})" class="element list-group-item list-group-item-action cursor-active">
         <div class="row">
             <div class="col-3">
                 <img src="${product.image}" alt="${product.description}" class="img-thumbnail">
@@ -32,8 +37,12 @@ function showProductsList(productArray) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  let url = PRODUCTS_URL + localStorage.getItem("catID") + EXT_TYPE;
+  let CategorieID = localStorage.getItem("catID");
   let currentProductsArray = [];
+  let url = PRODUCTS_URL + CategorieID + EXT_TYPE;
+
+  logged();
+
   getJSONData(url)
   .then(function (resultObj) {
     if (resultObj.status === "ok") {
@@ -66,19 +75,19 @@ document.getElementById("rangeFilterCountProducts").addEventListener("click",()=
 
   document.getElementById("sortAsc").addEventListener("click", ()=>{
 
-    let sortedArray = currentProductsArray.products;
+    let sortedArray = currentProductsArray.products.slice();
 
     sortedArray.sort((pr1,pr2)=>{
         return pr1.cost - pr2.cost;    
     });
 
-    showProductsList(sortedArray)
+    showProductsList(sortedArray);
 
   });
 
   document.getElementById("sortDesc").addEventListener("click", ()=>{
 
-    let sortedArray = currentProductsArray.products;
+    let sortedArray = currentProductsArray.products.slice();
 
     sortedArray.sort((pr1,pr2)=>{
       return pr2.cost - pr1.cost;
@@ -90,7 +99,7 @@ document.getElementById("rangeFilterCountProducts").addEventListener("click",()=
 
   document.getElementById("sortByCount").addEventListener("click", ()=>{
 
-    let sortedArray = currentProductsArray.products;
+    let sortedArray = currentProductsArray.products.slice();
 
     sortedArray.sort((pr1,pr2)=>{
       return pr2.soldCount - pr1.soldCount;

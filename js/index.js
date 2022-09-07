@@ -1,12 +1,5 @@
 
-function logged(){
-    let usuario = sessionStorage.getItem("user");
-    if (usuario != undefined){
-          document.getElementById("verPerfil").innerHTML = usuario;
-    }else{
-        window.location = "login.html"
-    }
-}
+
 
 document.addEventListener("DOMContentLoaded", function(){
     
@@ -22,11 +15,10 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
-    document.getElementById("verPerfil").addEventListener("click", function() {
+    document.getElementById("perfil").addEventListener("click", function() {
         window.location = "my-profile.html"
     });
 
     logged();
-
 
 });

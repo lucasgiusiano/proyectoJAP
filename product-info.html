@@ -31,18 +31,45 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" id="perfil"></a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <div id="produInfo">
+      </div>
+      <div id="produComments">
+        <h2 class="text-center text-muted">Comentarios</h2>
+        <hr>
+        <ul class="list-group" id="listComments">
+        </ul>
+
+        <div class="row justify-content-center mt-3">
+          <h2 class="text-muted text-center">Comentar</h2>
+          <hr>
+          <h3 class="text-center">Tu opinión</h3>
+          <label class="col-10" for="opinion"><input class="form-control" type="text" id="opinion"></label>
+          <h3 class="mt-2 text-center">Tu puntaje</h3>
+          <label class="col-10" for="puntuacion">
+            <select id="puntaje" class="form-select text-center">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </label>
+          <button class="btn btn-primary my-3 col-3" id="submit">Enviar</button>
+        </div>
+        
       </div>
     </div>
   </main>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
