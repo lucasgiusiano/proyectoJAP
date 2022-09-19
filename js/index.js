@@ -15,8 +15,11 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
-    document.getElementById("perfil").addEventListener("click", function() {
+    document.getElementById("verPerfil").addEventListener("click", function() {
         window.location = "my-profile.html"
+    });
+    document.getElementById("verCarrito").addEventListener("click", function() {
+        window.location = "cart.html"
     });
 
     logged();

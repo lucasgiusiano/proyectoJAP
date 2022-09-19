@@ -9,8 +9,10 @@ const EXT_TYPE = ".json";
 
 function logged(){
   let usuario = sessionStorage.getItem("user");
+
+
   if (usuario != undefined){
-        document.getElementById("perfil").innerHTML = usuario;
+        document.getElementById("nombreUsuario").innerHTML = sessionStorage.getItem("user");
   }else{
       window.location = "login.html"
   }

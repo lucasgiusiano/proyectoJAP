@@ -1,26 +1,37 @@
 let currentObjectInfo = {};
 let currentObjectComments = {};
 
+function goProfile(){
+  windows.location = "my-profile.html";
+}
 
 function showProductInfo(productInfo){
 let htmlContent = "";
+let htmlOfImages = "";
+
+
+for(let i = 0; i < productInfo.images.length; i++){
+  let imagen = productInfo.images[i];
+  
+  if(i == 0){
+    htmlOfImages += `
+  <div class="carousel-item active">
+    <img src="${imagen}" class="d-block w-100" alt="img${i}">
+  </div>`
+  }else{
+    htmlOfImages += `
+    <div class="carousel-item">
+      <img src="${imagen}" class="d-block w-100" alt="img${i}">
+    </div>`
+  }
+}
+
 
 htmlContent = `
 <div class="row justify-content-center" role="alert" id="product-info-show">
 <div id="photoCarousel" class="carousel slide carousel-fade col-9 my-5" data-bs-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="img/prod${productInfo.id}_1.jpg" class="d-block w-100" alt="img1">
-    </div>
-    <div class="carousel-item">
-      <img src="img/prod${productInfo.id}_2.jpg" class="d-block w-100" alt="img2">
-    </div>
-    <div class="carousel-item">
-      <img src="img/prod${productInfo.id}_3.jpg" class="d-block w-100" alt="img3">
-    </div>
-    <div class="carousel-item">
-      <img src="img/prod${productInfo.id}_4.jpg" class="d-block w-100" alt="img4">
-    </div>
+    ${htmlOfImages}
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#photoCarousel" data-bs-slide="prev">
     <span class="carousel-control-prev-icon btn-secondary" aria-hidden="true"></span>
@@ -80,7 +91,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     .then(function (resultObj) {
       if (resultObj.status === "ok") {
         currentObjectInfo = resultObj.data; 
-        console.log(currentObjectInfo);
         showProductInfo(currentObjectInfo);     
       }
     });
@@ -92,30 +102,41 @@ document.addEventListener("DOMContentLoaded",()=>{
       }
     });
 
+    document.getElementById("volver").addEventListener("click",()=>{
+
+      window.location = "products.html";
+
+    })
+
     document.getElementById("submit").addEventListener("click",()=>{
       let opinion = document.getElementById("opinion").value;
       let puntaje = document.getElementById("puntaje").value;
+      let usuario = sessionStorage.getItem("user");
+      let comment = {};
       let f = new Date();
-      let fecha = f.getFullYear()+"-"+f.getMonth()+"-"+f.getDay()+" "+f.getHours()+":"+f.getMinutes()+":"+f.getSeconds()
-      let user = sessionStorage.getItem("user");
+      let dia = f.getDate();
+      let mes = f.getMonth();
 
-      let htmlContent = "";
-      let htmlStars = "";
-
-      for(let j = 1; j <= 5; j ++){
-          if(j <= puntaje){
-              htmlStars += `<i class="fas fa-star"></i>`;
-          }else{
-              htmlStars += `<i class="far fa-star"></i>`;
-          }
+      if(f.getDate() < 10){
+        dia = "0" + f.getDate();
       }
 
-      htmlContent = `
-      <li class="list-group-item">
-        <p class="m-0 text-center"><span class="fw-bold">${user}</span> - <span class="text-muted">${fecha}</span> - ${htmlStars}</p>
-        <p class="text-muted m-0 text-center">${opinion}</p>
-      </li>`;
+      if(f.getMonth()< 10){
+        mes = "0" + f.getMonth();
+      }
 
-      document.getElementById("listComments").innerHTML += htmlContent;
+      let fecha = f.getFullYear() + "-" + mes + "-" + dia +" " + f.getHours() + ":" + f.getMinutes() + ":" + f.getSeconds();
+      
+      comment = {
+        product : currentObjectInfo.id,
+        score : puntaje,
+        description : opinion,
+        user : usuario,
+        dateTime : fecha
+      };
+
+      currentObjectComments.push(comment);
+      showProductComments(currentObjectComments)
     })
+
 })

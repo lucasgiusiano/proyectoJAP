@@ -30,8 +30,14 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" id="perfil"></a>
+          <li class="nav-item dropdown" id="perfil">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="nombreUsuario"></a>
+            <ul class="dropdown-menu">
+             <li><a class="dropdown-item" id="verPerfil" >Mi carrito</a></li>
+             <li><a class="dropdown-item" id="verPerfil" >Mi perfil</a></li>
+             <li><hr class="dropdown-divider"></li>
+             <li><a class="dropdown-item" id="cerrarSesion">Cerrar Sesión</a></li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -40,6 +46,10 @@
 
   <main>
     <div class="container">
+      <div class="row justify-content-center">
+        <button class="btn btn-dark text-muted fw-bold col-2 text-center mt-4 " id="volver">Volver a Productos</button>
+      </div>
+
       <div id="produInfo">
       </div>
       <div id="produComments">
