@@ -138,5 +138,5 @@ document.addEventListener("DOMContentLoaded",()=>{
       currentObjectComments.push(comment);
       showProductComments(currentObjectComments)
     })
-
+/*Quiero ver que*/
 })
