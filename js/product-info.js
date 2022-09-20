@@ -29,7 +29,7 @@ for(let i = 0; i < productInfo.images.length; i++){
 
 htmlContent = `
 <div class="row justify-content-center" role="alert" id="product-info-show">
-<div id="photoCarousel" class="carousel slide carousel-fade col-9 my-5" data-bs-ride="carousel">
+<div id="photoCarousel" class="carousel slide carousel-fade col-9 mb-5 mt-2" data-bs-ride="carousel">
   <div class="carousel-inner">
     ${htmlOfImages}
   </div>
@@ -79,19 +79,45 @@ function showProductComments(productComment){
 document.getElementById("listComments").innerHTML = htmlContent;
 }
 
+function setProdID(id){
+  localStorage.setItem("prodID",id);
+  window.location = "product-info.html"
+}
+
+function showRelatedProducts(relatedArray){
+
+  let htmlContent = "";
+
+  for(let i = 0; i < relatedArray.length; i++){
+    let actualProduct = relatedArray[i];
+
+    htmlContent += `
+    <button onclick="setProdID(${actualProduct.id})" class="card p-0 mx-2" id="related${i}" style="width: 18rem;">
+    <img src="${actualProduct.image}" class="card-img-top" alt="img${i}">
+    <div class="card-body">
+      <h5 class="card-title text-center mb-3">${actualProduct.name}</h5>
+    </div>
+  </button>`;
+
+  }
+
+  document.getElementById("relacionados").innerHTML += htmlContent;
+}
+
+
+
 document.addEventListener("DOMContentLoaded",()=>{
 
-  logged();
-
     let id = localStorage.getItem("prodID");
-    
     let urlProduct = PRODUCT_INFO_URL + id + EXT_TYPE;
     let urlComments = PRODUCT_INFO_COMMENTS_URL + id + EXT_TYPE;
+    
     getJSONData(urlProduct)
     .then(function (resultObj) {
       if (resultObj.status === "ok") {
         currentObjectInfo = resultObj.data; 
-        showProductInfo(currentObjectInfo);     
+        showProductInfo(currentObjectInfo);
+        showRelatedProducts(currentObjectInfo.relatedProducts);     
       }
     });
     getJSONData(urlComments)
@@ -102,11 +128,24 @@ document.addEventListener("DOMContentLoaded",()=>{
       }
     });
 
+    logged();
+
+    document.getElementById("verPerfil").addEventListener("click", function() {
+        window.location = "my-profile.html"
+    });
+  
+    document.getElementById("verCarrito").addEventListener("click", function() {
+        window.location = "cart.html"
+    });
+    
+    document.getElementById("cerrarSesion").addEventListener("click", function() {
+        window.location = "login.html";
+        sessionStorage.removeItem("user");
+    });
+
     document.getElementById("volver").addEventListener("click",()=>{
-
       window.location = "products.html";
-
-    })
+    });
 
     document.getElementById("submit").addEventListener("click",()=>{
       let opinion = document.getElementById("opinion").value;
@@ -138,5 +177,4 @@ document.addEventListener("DOMContentLoaded",()=>{
       currentObjectComments.push(comment);
       showProductComments(currentObjectComments)
     })
-/*Quiero ver que*/
 })

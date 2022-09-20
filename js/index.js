@@ -2,6 +2,8 @@
 
 
 document.addEventListener("DOMContentLoaded", function(){
+
+    logged();
     
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
@@ -21,7 +23,10 @@ document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("verCarrito").addEventListener("click", function() {
         window.location = "cart.html"
     });
-
-    logged();
+    document.getElementById("cerrarSesion").addEventListener("click", function() {
+        window.location = "login.html"
+        sessionStorage.removeItem("user");
+    });
+ 
 
 });

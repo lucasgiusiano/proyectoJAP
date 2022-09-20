@@ -31,13 +31,6 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item dropdown" id="perfil">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="nombreUsuario"></a>
-            <ul class="dropdown-menu">
-             <li><a class="dropdown-item" id="verPerfil" >Mi carrito</a></li>
-             <li><a class="dropdown-item" id="verPerfil" >Mi perfil</a></li>
-             <li><hr class="dropdown-divider"></li>
-             <li><a class="dropdown-item" id="cerrarSesion">Cerrar Sesión</a></li>
-            </ul>
           </li>
         </ul>
       </div>
@@ -47,11 +40,12 @@
   <main>
     <div class="container">
       <div class="row justify-content-center">
-        <button class="btn btn-dark text-muted fw-bold col-2 text-center mt-4 " id="volver">Volver a Productos</button>
+        <button class="btn text-muted fw-bold col-2 text-center mt-2 " id="volver"><i class="fa-solid fa-circle-arrow-left"></i> Volver a Productos</button>
       </div>
 
       <div id="produInfo">
       </div>
+
       <div id="produComments">
         <h2 class="text-center text-muted">Comentarios</h2>
         <hr>
@@ -74,9 +68,14 @@
             </select>
           </label>
           <button class="btn btn-primary my-3 col-3" id="submit">Enviar</button>
-        </div>
-        
+        </div>        
       </div>
+
+      <div id="relacionados" class="row justify-content-center mt-3">
+        <h2 class="text-center text-muted">Productos relacionados</h2>
+        <hr>
+      </div>
+
     </div>
   </main>
 
@@ -98,6 +97,7 @@
       <div></div>
     </div>
   </div>
+  <script src="https://kit.fontawesome.com/2a3cc7c643.js" crossorigin="anonymous"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>

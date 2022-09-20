@@ -31,6 +31,19 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     logged();
 
+  document.getElementById("verPerfil").addEventListener("click", function() {
+      window.location = "my-profile.html";
+  });
+
+  document.getElementById("verCarrito").addEventListener("click", function() {
+      window.location = "cart.html";
+  });
+  
+  document.getElementById("cerrarSesion").addEventListener("click", function() {
+      window.location = "login.html";
+      sessionStorage.removeItem("user");
+  });
+
     document.getElementById("productCountInput").addEventListener("change", function(){
         productCount = this.value;
         updateTotalCosts();

@@ -9,10 +9,19 @@ const EXT_TYPE = ".json";
 
 function logged(){
   let usuario = sessionStorage.getItem("user");
+  let htmlContentSession = "";
 
+  htmlContentSession = `
+  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="nombreUsuario">${usuario}</a>
+  <ul class="dropdown-menu">
+   <li><a class="dropdown-item" id="verCarrito" >Mi carrito</a></li>
+   <li><a class="dropdown-item" id="verPerfil" >Mi perfil</a></li>
+   <li><hr class="dropdown-divider"></li>
+   <li><a class="dropdown-item" id="cerrarSesion">Cerrar Sesión</a></li>
+  </ul>`;
 
   if (usuario != undefined){
-        document.getElementById("nombreUsuario").innerHTML = sessionStorage.getItem("user");
+        document.getElementById("perfil").innerHTML = htmlContentSession;
   }else{
       window.location = "login.html"
   }
