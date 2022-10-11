@@ -49,6 +49,9 @@ htmlContent = `
   <h3 class="text-center fw-bold mt-3">${productInfo.soldCount}</h3>
   <h3 class="text-center fw-bold mb-3">Unidades Vendidas</h3>
   <p class="text-center">Categoría: ${productInfo.category}</p>
+
+  
+  
 </div>
 </div>`;
 
@@ -177,4 +180,28 @@ document.addEventListener("DOMContentLoaded",()=>{
       currentObjectComments.push(comment);
       showProductComments(currentObjectComments)
     })
+
+    document.getElementById("comprar").addEventListener("click", ()=>{
+      let listOfArticles = []
+      let newArticleOnCart = {
+        "id": currentObjectInfo.id,
+        "name": currentObjectInfo.name,
+        "count": 1,
+        "unitCost": currentObjectInfo.cost,
+        "image": currentObjectInfo.images[0],
+        "currency": currentObjectInfo.currency
+      }
+
+      if(localStorage.getItem("articles") == undefined){
+        listOfArticles.push(newArticleOnCart);
+        localStorage.setItem("articles",JSON.stringify(listOfArticles));
+      }else{
+        listOfArticles = JSON.parse(localStorage.getItem("articles"));
+        localStorage.removeItem("articles");
+        listOfArticles.push(newArticleOnCart);
+        localStorage.setItem("articles",JSON.stringify(listOfArticles));
+      }
+    })
+
+
 })

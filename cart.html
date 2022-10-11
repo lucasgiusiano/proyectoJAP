@@ -29,19 +29,63 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item dropdown" id="perfil">
           </li>
         </ul>
       </div>
     </div>
   </nav>
+
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <div>
+      <h2 class="text-center text-muted mt-2">Carrito de compras</h2>
+      <hr>
+      <h3 class="text-center text-muted mt-2">Articulos a comprar</h3>
+      <table class="table text-center text-muted mt-2">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Costo</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="tabla">
+        </tbody>
+      </table>
+      <h4 class="text-center text-muted">Resumen del pedido: <span id="resumen"></span></h4>
+    </div>
+    <hr>
+    <div> 
+      <div class="row justify-content-center mt-3">
+        <h2 class="text-center text-muted">Tipo de envío</h2>
+        <label class="col-auto my-3" for="envio"><input class="form-check-input" type="radio" name="envio"><span class="fw-bold"> Premium</span> 2 a 5 días (15%)</label><br>
+        <label class="col-auto my-3" for="envio"><input class="form-check-input" type="radio" name="envio"><span class="fw-bold"> Express</span> 5 a 8 días (7%)</label><br>
+        <label class="col-auto my-3" for="envio"><input class="form-check-input" type="radio" name="envio"><span class="fw-bold"> Standard</span> 12 a 15 días (5%)</label><br>
+      </div>
+
+      <div class="row justify-content-center">
+        <h2 class="text-center text-muted mt-2">Dirección de envío</h2>
+        <div class="col-10">
+          <label for="exampleFormControlInput1" class="form-label mt-2 col-8"><span class="ms-2">Calle</span>
+            <input type="email" class="form-control">
+          </label>
+          
+          <label for="exampleFormControlInput1" class="form-label mt-2 col-3"><span class="ms-2">Número</span><br>
+            <input type="email" class="form-control"></label>
+        </div>
+        
+        <label for="exampleFormControlInput1" class="form-label mt-2 col-10"><span class="ms-2">Esquina</span>
+          <input type="email" class="form-control">
+        </label>
+        
       </div>
     </div>
+    </div>
   </main>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">

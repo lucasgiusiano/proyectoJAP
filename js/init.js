@@ -12,12 +12,12 @@ function logged(){
   let htmlContentSession = "";
 
   htmlContentSession = `
-  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="nombreUsuario">${usuario}</a>
+  <a class="btn btn-secondary nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="nombreUsuario">${usuario}</a>
   <ul class="dropdown-menu">
-   <li><a class="dropdown-item" id="verCarrito" >Mi carrito</a></li>
-   <li><a class="dropdown-item" id="verPerfil" >Mi perfil</a></li>
+   <li><a role="button" class="dropdown-item" id="verCarrito" >Mi carrito</a></li>
+   <li><a role="button" class="dropdown-item" id="verPerfil" >Mi perfil</a></li>
    <li><hr class="dropdown-divider"></li>
-   <li><a class="dropdown-item" id="cerrarSesion">Cerrar Sesión</a></li>
+   <li><a role="button" class="dropdown-item" id="cerrarSesion">Cerrar Sesión</a></li>
   </ul>`;
 
   if (usuario != undefined){
