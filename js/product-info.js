@@ -29,7 +29,7 @@ for(let i = 0; i < productInfo.images.length; i++){
 
 htmlContent = `
 <div class="row justify-content-center" role="alert" id="product-info-show">
-<div id="photoCarousel" class="carousel slide carousel-fade col-9 mb-5 mt-2" data-bs-ride="carousel">
+<div id="photoCarousel" class="carousel slide carousel-fade col-12 col-sm-9 mb-5 mt-2" data-bs-ride="carousel">
   <div class="carousel-inner">
     ${htmlOfImages}
   </div>
@@ -133,23 +133,6 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     logged();
 
-    document.getElementById("verPerfil").addEventListener("click", function() {
-        window.location = "my-profile.html"
-    });
-  
-    document.getElementById("verCarrito").addEventListener("click", function() {
-        window.location = "cart.html"
-    });
-    
-    document.getElementById("cerrarSesion").addEventListener("click", function() {
-        window.location = "login.html";
-        sessionStorage.removeItem("user");
-    });
-
-    document.getElementById("volver").addEventListener("click",()=>{
-      window.location = "products.html";
-    });
-
     document.getElementById("submit").addEventListener("click",()=>{
       let opinion = document.getElementById("opinion").value;
       let puntaje = document.getElementById("puntaje").value;
@@ -201,6 +184,12 @@ document.addEventListener("DOMContentLoaded",()=>{
         listOfArticles.push(newArticleOnCart);
         localStorage.setItem("articles",JSON.stringify(listOfArticles));
       }
+      Swal.fire({
+        icon: 'success',
+        title: 'Agregado al Carrito',
+        timer: '1000',
+        showConfirmButton: 'false'
+      });
     })
 
 

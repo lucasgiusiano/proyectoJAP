@@ -52,10 +52,10 @@ function showCategoriesList(){
             htmlContentToAppend += `
             <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-5 col-sm-3">
                         <img src="${category.imgSrc}" alt="${category.description}" class="img-thumbnail">
                     </div>
-                    <div class="col">
+                    <div class="col-7 col-sm-9">
                         <div class="d-flex w-100 justify-content-between">
                             <h4 class="mb-1">${category.name}</h4>
                             <small class="text-muted">${category.productCount} artículos</small>
@@ -97,19 +97,6 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 
     logged();
-
-    document.getElementById("verPerfil").addEventListener("click", function() {
-        window.location = "my-profile.html"
-    });
-
-    document.getElementById("verCarrito").addEventListener("click", function() {
-        window.location = "cart.html"
-    });
-    
-    document.getElementById("cerrarSesion").addEventListener("click", function() {
-        window.location = "login.html"
-        sessionStorage.removeItem("user");
-    });
 
     document.getElementById("sortAsc").addEventListener("click", function(){
         sortAndShowCategories(ORDER_ASC_BY_NAME);

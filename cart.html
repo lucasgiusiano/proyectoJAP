@@ -59,7 +59,7 @@
     </div>
     <hr>
     <div> 
-      <form class="row justify-content-center mt-3 needs-validation" id="formTipoEnvio">
+      <form class="row justify-content-center mt-3 needs-validation ps-3" id="formTipoEnvio">
         <h2 class="text-center text-muted">Tipo de envío</h2>
 
         <div class="form-check mb-3">
@@ -77,26 +77,25 @@
           <label class="form-check-label" for="radio15"><span class="fw-bold"> Standard</span> 12 a 15 días (5%)</label>
           <div class="invalid-feedback">Seleccione un tipo de envio</div>
         </div>
-
-        </form>
+      </form>
 
       <form class="row justify-content-center needs-validation" id="formEnvio" novalidate>
         <h2 class="text-center text-muted mt-2">Dirección de envío</h2>
-        <div class="col-md-4">
+        <div class="col-md-4 mt-2">
           <label for="calle" class="form-label">Calle</label>
           <input type="text" class="form-control" id="calle" required>
           <div class="invalid-feedback">
             Ingrese una calle
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mt-2">
           <label for="numeroCalle" class="form-label invalidy">Número</label>
           <input type="text" class="form-control" id="numeroCalle" required>
           <div class="invalid-feedback">
             Ingrese un número de calle
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mt-2">
           <label for="esquinaCalle" class="form-label">Esquina</label>
           <input type="text" class="form-control" id="esquinaCalle" required>
           <div class="invalid-feedback">
@@ -111,12 +110,12 @@
         <h2 class="col-12 text-center text-muted mt-2 mb-3">Resumen de su pedido</h2>
         
         <hr class="col-8">
-        <p class="col-8 row justify-content-between m-0"><span class="col">Subtotal</span><span class="col text-end divisa">USD</span><span class="col-1 text-center fw-bold" id="precioSubtotal"></span> </p>
+        <p class="col-8 row justify-content-between m-0"><span class="col">Subtotal</span><span class="col text-end divisa">USD</span><span class="col-3 col-sm-1 text-center fw-bold" id="precioSubtotal"></span> </p>
         <p class="col-8 text-muted row justify-content-between"><span class="col">Costo unitario del producto por cantidad</span></p>
-        <p class="col-8 row justify-content-between m-0"><span class="col">Costo de envío</span><span class="col text-end divisa">USD</span><span class="col-1 text-center fw-bold" id="precioEnvio">Selecione tipo de envío</span> </p>
+        <p class="col-8 row justify-content-between m-0"><span class="col">Costo de envío</span><span class="col text-end divisa">USD</span><span class="col-3 col-sm-1 text-center fw-bold" id="precioEnvio">Selecione envío</span> </p>
         <p class="col-8 text-muted row justify-content-between"><span class="col">Según tipo de envío</span></p>
         <hr class="col-8">
-        <p class="col-8 row justify-content-between m-0"><span class="col">Total</span><span class="col text-end divisa">USD</span><span class="col-1 text-center fw-bold" id="precioTotal"></span> </p>
+        <p class="col-8 row justify-content-between m-0"><span class="col">Total</span><span class="col text-end divisa">USD</span><span class="col-3 col-sm-1 text-center fw-bold" id="precioTotal"></span> </p>
         <hr class="col-8 mt-3">
       </div>
 
@@ -150,7 +149,7 @@
         </div>
       </div>
       <hr>
-      <div class="col-12 row justify-content-center">
+      <div class="col-12  m-0 row justify-content-center">
         <button class="btn btn-primary col-8" id="finalizarComp">Finalizar compra</button>
       </div> 
 

@@ -44,19 +44,79 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item dropdown" id="perfil">
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+
+  <main class="row justify-content-center col-12">
+
+    <div class="container col-12 row justify-content-center p-0">
+
+      <div class="col-10 align-items-center row justify-content-between">
+        <h2 class="col-6 mb-0">Perfil</h2>
+        <img class="col-4 col-sm-2 col-lg-1 rounded-circle my-2" src="img/img_perfil.png" alt="" id="imagenPerfil">
       </div>
+
+     <form class="col-10 row justify-content-center g-3 needs-validation m-0" id="formPerfil" novalidate>
+        
+        <hr class="mt-0">
+
+        <div class="col-md-4 mx-2">
+          <label for="nombre" class="form-label">Primer nombre<span class="text-danger fw-bold">*</span></label>
+          <input type="text" class="form-control" id="nombre" required>
+          <div class="invalid-feedback">
+            Debe ingresar un nombre.
+          </div>
+        </div>
+
+        <div class="col-md-4 mx-2">
+          <label for="sNombre" class="form-label">Segundo nombre</label>
+          <input type="text" class="form-control" id="sNombre">
+        </div>
+
+        <div class="col-md-4 mx-2">
+          <label for="apellido" class="form-label">Primer apellido<span class="text-danger fw-bold">*</span></label>
+          <input type="text" class="form-control" id="apellido" required>
+          <div class="invalid-feedback">
+            Debe ingresar un apellido.
+          </div>
+        </div>
+
+        <div class="col-md-4 mx-2">
+          <label for="sApellido" class="form-label">Segundo apellido</label>
+          <input type="text" class="form-control" id="sApellido">
+        </div>
+
+        <div class="col-md-4 mx-2">
+          <label for="email" class="form-label">E-mail<span class="text-danger fw-bold">*</span></label>
+          <input type="email" class="form-control" id="email" required>
+          <div class="invalid-feedback">
+            Debe ingresar un correo valido
+          </div>
+        </div>
+        
+        <div class="col-md-4 mx-2">
+          <label for="telefono" class="form-label">Teléfono de contacto</label>
+          <input type="number" class="form-control" id="contacto">
+        </div>
+
+        <div class="col-md-7 mx-2">
+          <label for="imagen" class="form-label">Foto de Perfil</label>
+          <input type="file" class="form-control" accept=".png,.jpg" id="imagen">
+        </div>
+
+        <hr>
+        <div class="col-12 row justify-content-center">
+          <button class="btn btn-primary col-6 col-md-3" type="submit" id="guardar">Guardar cambios</button>
+        </div>
+      </form>
+      
     </div>
   </main>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -67,6 +127,7 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/my-profile.js"></script>

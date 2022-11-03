@@ -8,23 +8,27 @@ const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
 function logged(){
-  let usuario = sessionStorage.getItem("user");
+  let usuario = JSON.parse(sessionStorage.getItem("user"));
   let htmlContentSession = "";
-
-  htmlContentSession = `
-  <a class="btn btn-secondary nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="nombreUsuario">${usuario}</a>
-  <ul class="dropdown-menu">
-   <li><a role="button" class="dropdown-item" id="verCarrito" >Mi carrito</a></li>
-   <li><a role="button" class="dropdown-item" id="verPerfil" >Mi perfil</a></li>
-   <li><hr class="dropdown-divider"></li>
-   <li><a role="button" class="dropdown-item" id="cerrarSesion">Cerrar Sesión</a></li>
-  </ul>`;
-
+  
   if (usuario != undefined){
-        document.getElementById("perfil").innerHTML = htmlContentSession;
+    htmlContentSession = `
+    <a class="btn btn-secondary nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="nombreUsuario">${usuario.email}</a>
+    <ul class="dropdown-menu">
+      <li><a role="button" class="dropdown-item" id="verCarrito" href="cart.html">Mi carrito</a></li>
+      <li><a role="button" class="dropdown-item" id="verPerfil" href="my-profile.html">Mi perfil</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a role="button" class="dropdown-item" id="cerrarSesion" onclick="unlogUser()" href="login.html">Cerrar Sesión</a></li>
+    </ul>`;
+
+    document.getElementById("perfil").innerHTML = htmlContentSession;
   }else{
       window.location = "login.html"
   }
+}
+
+function unlogUser(){
+  sessionStorage.removeItem("user");
 }
 
 let showSpinner = function(){

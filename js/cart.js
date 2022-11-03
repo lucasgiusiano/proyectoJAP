@@ -81,7 +81,7 @@ function showCartInfo(){
         
         htmlContent += `          
         <tr>
-            <th scope="row" class="col-2 align-middle"><img class="w-50" src="${article.image}" alt="img${i}"></th>
+            <td scope="row" class="col-2 align-middle"><img class="col-12 col-sm-10 col-lg-6" src="${article.image}" alt="img${i}"></td>
             <td class="align-middle">${article.name}</td>
             <td class="align-middle">${article.currency} ${article.unitCost}</td>
             <td class="align-middle col-1"><input class="text-center form-control form-control-sm" name="count" type="number" value="${article.count}" min="1" id="input${article.id}"></td>
@@ -146,19 +146,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
       });
 
     logged();
-
-    document.getElementById("verPerfil").addEventListener("click", function() {
-        window.location = "my-profile.html"
-    });
-  
-    document.getElementById("verCarrito").addEventListener("click", function() {
-        window.location = "cart.html"
-    });
-    
-    document.getElementById("cerrarSesion").addEventListener("click", function() {
-        window.location = "login.html";
-        sessionStorage.removeItem("user");
-    });
 
     document.getElementById("radio15").addEventListener("click",()=>{
         totalPriceCalculator();

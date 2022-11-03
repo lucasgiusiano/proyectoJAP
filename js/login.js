@@ -1,23 +1,40 @@
 function login() {
+  let newUser = {name: "",secName:"", surname: "",secSurname:"",email:"",phoneNum: 0,password:"",image:""}
   let email = document.getElementById("email").value;
   let pass = document.getElementById("contra").value;
+  let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
 
   if (email === "" || email === "Correo Electrónico" && pass === "" || pass === "Contraseña") {
-    alert("Debe ingresar un correo y una contraseña válidos");
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Debe ingresar un correo y una contraseña válidos'
+    });
     document.getElementById("email").classList.remove("border-dark");
     document.getElementById("email").classList.add("border-danger");
     document.getElementById("contra").classList.remove("border-dark");
     document.getElementById("contra").classList.add("border-danger");
-  } else if (email === "" || email === "Correo Electrónico") {
-    alert("Debe ingresar un correo válido");
+  } else if (email === "" || email === "Correo Electrónico" || !emailRegex.test(email)) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Debe ingresar un correo válido'
+    });
     document.getElementById("email").classList.remove("border-dark");
     document.getElementById("email").classList.add("border-danger");
   } else if (pass === "" || pass === "Contraseña") {
-    alert("Debe ingresar una contraseña válida");
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Debe ingresar una contraseña válido'
+    });
     document.getElementById("contra").classList.remove("border-dark");
     document.getElementById("contra").classList.add("border-danger");
   } else {
-    sessionStorage.setItem("user",email);
+    newUser.email = email;
+    newUser.password = pass;
+    sessionStorage.setItem("user",JSON.stringify(newUser));
     location.href = "index.html";
   }
 }
@@ -28,10 +45,21 @@ document.addEventListener("DOMContentLoaded", () => {
     icon: 'error',
     title: 'Oops...',
     text: 'Por favor inicie sesion para navegar por la pagina.'
-  })
+  });
 
   document.getElementById("email").addEventListener("click", () => {
     document.getElementById("email").value = "";
+  });
+  document.getElementById("email").addEventListener("input", () => {
+    campo = event.target;
+        
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+    if (emailRegex.test(campo.value)) {
+      console.log("valido");
+    } else {
+      console.log("invalido");
+    }
   });
   document.getElementById("contra").addEventListener("click", () => {
     document.getElementById("contra").value = "";
