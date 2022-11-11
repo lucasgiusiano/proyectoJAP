@@ -1,4 +1,5 @@
-function login() {
+//Chequea que los datos ingresados por el ususario sean correctos y en caso de que lo sean realiza el log 
+function loginCheck() {
   let newUser = {name: "",secName:"", surname: "",secSurname:"",email:"",phoneNum: 0,password:"",image:""}
   let email = document.getElementById("email").value;
   let pass = document.getElementById("contra").value;
@@ -40,32 +41,28 @@ function login() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-
   Swal.fire({
     icon: 'error',
     title: 'Oops...',
-    text: 'Por favor inicie sesion para navegar por la pagina.'
+    text: 'Por favor inicie sesion para continuar navegando por la pagina.'
   });
 
   document.getElementById("email").addEventListener("click", () => {
     document.getElementById("email").value = "";
   });
-  document.getElementById("email").addEventListener("input", () => {
-    campo = event.target;
-        
-    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
-    if (emailRegex.test(campo.value)) {
-      console.log("valido");
-    } else {
-      console.log("invalido");
-    }
-  });
+
   document.getElementById("contra").addEventListener("click", () => {
     document.getElementById("contra").value = "";
   });
 
+  document.getElementById("contra").addEventListener("keypress", (event) => {
+    if(event.key === "Enter"){
+      loginCheck();
+    }
+    
+  });
+
   document.getElementById("iniciar").addEventListener("click", () => {
-    login();
+    loginCheck();
   });
 });

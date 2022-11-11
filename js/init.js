@@ -6,11 +6,21 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/prod
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
+let usuario = JSON.parse(sessionStorage.getItem("user"));
 
-function logged(){
-  let usuario = JSON.parse(sessionStorage.getItem("user"));
+function checkLoggedUser(){
+  if (usuario == undefined){
+      window.location = "login.html"
+  }
+}
+
+function unlogUser(){
+  sessionStorage.removeItem("user");
+}
+
+function showUserOptions(){
   let htmlContentSession = "";
-  
+
   if (usuario != undefined){
     htmlContentSession = `
     <a class="btn btn-secondary nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="nombreUsuario">${usuario.email}</a>
@@ -22,13 +32,7 @@ function logged(){
     </ul>`;
 
     document.getElementById("perfil").innerHTML = htmlContentSession;
-  }else{
-      window.location = "login.html"
   }
-}
-
-function unlogUser(){
-  sessionStorage.removeItem("user");
 }
 
 let showSpinner = function(){

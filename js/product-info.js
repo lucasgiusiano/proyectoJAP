@@ -131,7 +131,8 @@ document.addEventListener("DOMContentLoaded",()=>{
       }
     });
 
-    logged();
+    checkLoggedUser();
+    showUserOptions();
 
     document.getElementById("submit").addEventListener("click",()=>{
       let opinion = document.getElementById("opinion").value;

@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         }
       });
 
-    logged();
+    showUserOptions();
 
     document.getElementById("radio15").addEventListener("click",()=>{
         totalPriceCalculator();

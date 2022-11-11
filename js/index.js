@@ -3,7 +3,7 @@
 
 document.addEventListener("DOMContentLoaded", function(){
 
-    logged();
+    showUserOptions();
     
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);

@@ -1,6 +1,7 @@
+let currentProductsArray = [];
 
-function setNameOfCategory(cate){
-  document.getElementById("catproduct").innerHTML += " " + cate.catName;
+function setNameOfCategory(){
+  document.getElementById("catproduct").innerHTML += " " + currentProductsArray.catName;
 }
 
 function setProdID(id){
@@ -8,7 +9,7 @@ function setProdID(id){
   window.location = "product-info.html"
 }
 
-function showProductsList(productArray) {
+function showProductsList(productArray) { 
   let htmlContentToAppend = "";
 
   for (let i = 0; i < productArray.length; i++) {
@@ -36,36 +37,8 @@ function showProductsList(productArray) {
   document.getElementById("product-list-container").innerHTML = htmlContentToAppend;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  let CategorieID = localStorage.getItem("catID");
-  let currentProductsArray = [];
-  let url = PRODUCTS_URL + CategorieID + EXT_TYPE;
-
-  logged();
-
-  document.getElementById("verPerfil").addEventListener("click", function() {
-      window.location = "my-profile.html";
-  });
-
-  document.getElementById("verCarrito").addEventListener("click", function() {
-      window.location = "cart.html";
-  });
-  
-  document.getElementById("cerrarSesion").addEventListener("click", function() {
-      window.location = "login.html";
-      sessionStorage.removeItem("user");
-  });
-
-  getJSONData(url)
-  .then(function (resultObj) {
-    if (resultObj.status === "ok") {
-      currentProductsArray = resultObj.data
-      showProductsList(currentProductsArray.products);
-      setNameOfCategory(currentProductsArray);
-    }
-  });
-
-document.getElementById("rangeFilterCountProducts").addEventListener("click",()=>{
+//Filtra los productos dependiendo de los valores ingresados en los inputs
+function filterByCount(){
   let min = document.getElementById("rangeFilterCountMinPrice").value;
   let max = document.getElementById("rangeFilterCountMaxPrice").value;
 
@@ -76,9 +49,76 @@ document.getElementById("rangeFilterCountProducts").addEventListener("click",()=
   let filtredArray = currentProductsArray.products.filter(produ => produ.cost >= min && produ.cost <= max);
 
   showProductsList(filtredArray);
+}
 
+//Ordena los productos de forma ascendente segun su precio
+function sortProductsAsc(){
+  let sortedArray = currentProductsArray.products.slice();
+
+  sortedArray.sort((pr1,pr2)=>{
+      return pr1.cost - pr2.cost;    
   });
 
+  showProductsList(sortedArray);
+}
+
+//Ordena los productos de forma descendente segun su precio
+function sortProductsDesc(){
+  let sortedArray = currentProductsArray.products.slice();
+
+  sortedArray.sort((pr1,pr2)=>{
+    return pr2.cost - pr1.cost;
+  });
+
+  showProductsList(sortedArray)
+}
+
+//Ordena los productos de forma ascendente segun la cantidad de productos vendidos
+function sortBySoldAmount(){
+  let sortedArray = currentProductsArray.products.slice();
+
+  sortedArray.sort((pr1,pr2)=>{
+    return pr2.soldCount - pr1.soldCount;
+  });
+
+  showProductsList(sortedArray)
+}
+
+function filterBySearch(){
+  let search = document.getElementById("searcher").value;
+    
+  let searchedArray = currentProductsArray.products.filter( pr => {
+    return pr.name.toLowerCase().indexOf(search.toLowerCase()) > -1 || pr.description.toLowerCase().indexOf(search.toLowerCase()) > -1;
+  })
+  
+  showProductsList(searchedArray);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  //Toma de localStorage el id de la categoria seleccionada por el usuario y lo concantena con la URL de los productos y la extensión .json
+  let CategorieID = localStorage.getItem("catID");
+  let url = PRODUCTS_URL + CategorieID + EXT_TYPE;
+
+  //Realiza el fetch al servidor, el objeto devuelto lo guarda en el array currentProductsArray y llama a las funciones que muestran los productos y 
+  //el nombre de la categoria seleccionada
+  getJSONData(url)
+  .then(function (resultObj) {
+    if (resultObj.status === "ok") {
+      currentProductsArray = resultObj.data
+      showProductsList(currentProductsArray.products);
+      setNameOfCategory();
+    }
+  });
+
+  //Muestra el menu desplegable con la información del carrito y pergil del usuario
+  showUserOptions();
+
+document.getElementById("rangeFilterCountProducts").addEventListener("click",()=>{
+  filterByCount();
+  });
+
+//Al hacer click en el botón "limpiar" se limpian los valores de los inputs y se llama nuevamente a la función que muestra los 
+//productos ahora con el array de productos original para que se muestren todos
   document.getElementById("clearRangeFilterProducts").addEventListener("click",()=>{
     document.getElementById("rangeFilterCountMinPrice").value = "";
     document.getElementById("rangeFilterCountMaxPrice").value = "";
@@ -87,49 +127,19 @@ document.getElementById("rangeFilterCountProducts").addEventListener("click",()=
   });
 
   document.getElementById("sortAsc").addEventListener("click", ()=>{
-
-    let sortedArray = currentProductsArray.products.slice();
-
-    sortedArray.sort((pr1,pr2)=>{
-        return pr1.cost - pr2.cost;    
-    });
-
-    showProductsList(sortedArray);
-
+    sortProductsAsc();
   });
 
   document.getElementById("sortDesc").addEventListener("click", ()=>{
-
-    let sortedArray = currentProductsArray.products.slice();
-
-    sortedArray.sort((pr1,pr2)=>{
-      return pr2.cost - pr1.cost;
-    });
-
-    showProductsList(sortedArray)
-
+    sortProductsDesc();
   });
 
   document.getElementById("sortByCount").addEventListener("click", ()=>{
-
-    let sortedArray = currentProductsArray.products.slice();
-
-    sortedArray.sort((pr1,pr2)=>{
-      return pr2.soldCount - pr1.soldCount;
-    });
-
-    showProductsList(sortedArray)
-
+    sortBySoldAmount();
   });
 
   document.getElementById("searcher").addEventListener("keyup",()=>{
-    let search = document.getElementById("searcher").value;
-    
-    let searchedArray = currentProductsArray.products.filter( pr => {
-      return pr.name.toLowerCase().indexOf(search.toLowerCase()) > -1 || pr.description.toLowerCase().indexOf(search.toLowerCase()) > -1;
-    })
-    
-    showProductsList(searchedArray);
+    filterBySearch();
   });
   
 });

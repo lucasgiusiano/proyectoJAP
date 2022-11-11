@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
     });
 
-    logged();
+    showUserOptions();
 
     document.getElementById("sortAsc").addEventListener("click", function(){
         sortAndShowCategories(ORDER_ASC_BY_NAME);

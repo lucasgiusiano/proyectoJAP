@@ -7,7 +7,10 @@ function chargeInfoOfUser(){
     document.getElementById("sApellido").value = thisUser.secSurname;
     document.getElementById("email").value = thisUser.email;
     document.getElementById("contacto").value = thisUser.phoneNum;
-    document.getElementById("imagenPerfil").src = thisUser.image
+    if(thisUser.image != ""){
+        document.getElementById("imagenPerfil").src = thisUser.image;
+    }
+    
 
  }
 
@@ -36,7 +39,7 @@ function catchAndSaveImage(){
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
-    logged();
+    showUserOptions();
     chargeInfoOfUser();
 
     document.getElementById("formPerfil").addEventListener("submit", ()=>{
