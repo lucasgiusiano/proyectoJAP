@@ -1,14 +1,11 @@
 let currentObjectInfo = {};
 let currentObjectComments = {};
 
-function goProfile(){
-  windows.location = "my-profile.html";
-}
-
+//Primeramente se recorre el array de las imagenes que contiene el poducto para generar el codigo html necesario para agregarlo al carrussel de bootstrap
+//Lo siguiente genera la vista de los demas atributos del objeto o producto y las pasa junto con el html generado para las imagenes a la pagina html de product-info
 function showProductInfo(productInfo){
 let htmlContent = "";
 let htmlOfImages = "";
-
 
 for(let i = 0; i < productInfo.images.length; i++){
   let imagen = productInfo.images[i];
@@ -49,15 +46,13 @@ htmlContent = `
   <h3 class="text-center fw-bold mt-3">${productInfo.soldCount}</h3>
   <h3 class="text-center fw-bold mb-3">Unidades Vendidas</h3>
   <p class="text-center">Categoría: ${productInfo.category}</p>
-
-  
-  
 </div>
 </div>`;
 
 document.getElementById("produInfo").innerHTML = htmlContent;
 }
 
+//Recorre el array que tiene el producto y para mostrar las estrellas como puntuación utiliza otro bucle FOR para poner las que correspondan y dar la vista correcta al usuario
 function showProductComments(productComment){
     let htmlContent = "";
     
@@ -82,11 +77,47 @@ function showProductComments(productComment){
 document.getElementById("listComments").innerHTML = htmlContent;
 }
 
+//Toma los valores de los inputs de los comentarios les da formato y convierte todo en un objeto que pushea dentro del array de comentarios que ya trae el articulo
+//Luego llama a la funcion showProductComments para mostrar el array
+function submitComment(){
+  let opinion = document.getElementById("opinion").value;
+      let puntaje = document.getElementById("puntaje").value;
+      let usuario = JSON.parse(sessionStorage.getItem("user"));
+      let comment = {};
+      let f = new Date();
+      let dia = f.getDate();
+      let mes = f.getMonth();
+
+      if(f.getDate() < 10){
+        dia = "0" + f.getDate();
+      }
+
+      if(f.getMonth()< 10){
+        mes = "0" + f.getMonth();
+      }
+
+      let fecha = f.getFullYear() + "-" + mes + "-" + dia +" " + f.getHours() + ":" + f.getMinutes() + ":" + f.getSeconds();
+      
+      comment = {
+        product : currentObjectInfo.id,
+        score : puntaje,
+        description : opinion,
+        user : usuario.email,
+        dateTime : fecha
+      };
+
+      currentObjectComments.push(comment);
+      showProductComments(currentObjectComments)
+}
+
+//Settea el id del producto relacionado clickeado en localStorage para mostrarlo
 function setProdID(id){
   localStorage.setItem("prodID",id);
   window.location = "product-info.html"
 }
 
+
+//recorre el array de productos relacionados que trae el producto para mostrarlos y permitir ver mas informacion sobre estos si se le hace click
 function showRelatedProducts(relatedArray){
 
   let htmlContent = "";
@@ -105,6 +136,37 @@ function showRelatedProducts(relatedArray){
   }
 
   document.getElementById("relacionados").innerHTML += htmlContent;
+}
+
+//Crea un objeto con los atributos del producto que esta viendo el cliente y lo guarda en localStorage para luego utilizarlo desde la pagina del carrito
+function shopProduct(){
+  let listOfArticles = []
+  let newArticleOnCart = {
+    "id": currentObjectInfo.id,
+    "name": currentObjectInfo.name,
+    "count": 1,
+    "unitCost": currentObjectInfo.cost,
+    "image": currentObjectInfo.images[0],
+    "currency": currentObjectInfo.currency
+  }
+
+  //En caso de que no exista un espacio para esta funcion en localStorage, lo crea y guarda en un array con los articulos, de lo contrario primero trae el array
+  //del localStorage pushea el nuevo articulo comprado, elimina el antiguo espacio con el viejo array y crea uno nuevo actualizado.
+  if(localStorage.getItem("articles") == undefined){
+    listOfArticles.push(newArticleOnCart);
+    localStorage.setItem("articles",JSON.stringify(listOfArticles));
+  }else{
+    listOfArticles = JSON.parse(localStorage.getItem("articles"));
+    localStorage.removeItem("articles");
+    listOfArticles.push(newArticleOnCart);
+    localStorage.setItem("articles",JSON.stringify(listOfArticles));
+  }
+  Swal.fire({
+    icon: 'success',
+    title: 'Agregado al Carrito',
+    timer: '1000',
+    showConfirmButton: 'false'
+  });
 }
 
 
@@ -135,63 +197,10 @@ document.addEventListener("DOMContentLoaded",()=>{
     showUserOptions();
 
     document.getElementById("submit").addEventListener("click",()=>{
-      let opinion = document.getElementById("opinion").value;
-      let puntaje = document.getElementById("puntaje").value;
-      let usuario = sessionStorage.getItem("user");
-      let comment = {};
-      let f = new Date();
-      let dia = f.getDate();
-      let mes = f.getMonth();
-
-      if(f.getDate() < 10){
-        dia = "0" + f.getDate();
-      }
-
-      if(f.getMonth()< 10){
-        mes = "0" + f.getMonth();
-      }
-
-      let fecha = f.getFullYear() + "-" + mes + "-" + dia +" " + f.getHours() + ":" + f.getMinutes() + ":" + f.getSeconds();
-      
-      comment = {
-        product : currentObjectInfo.id,
-        score : puntaje,
-        description : opinion,
-        user : usuario,
-        dateTime : fecha
-      };
-
-      currentObjectComments.push(comment);
-      showProductComments(currentObjectComments)
+      submitComment();
     })
 
     document.getElementById("comprar").addEventListener("click", ()=>{
-      let listOfArticles = []
-      let newArticleOnCart = {
-        "id": currentObjectInfo.id,
-        "name": currentObjectInfo.name,
-        "count": 1,
-        "unitCost": currentObjectInfo.cost,
-        "image": currentObjectInfo.images[0],
-        "currency": currentObjectInfo.currency
-      }
-
-      if(localStorage.getItem("articles") == undefined){
-        listOfArticles.push(newArticleOnCart);
-        localStorage.setItem("articles",JSON.stringify(listOfArticles));
-      }else{
-        listOfArticles = JSON.parse(localStorage.getItem("articles"));
-        localStorage.removeItem("articles");
-        listOfArticles.push(newArticleOnCart);
-        localStorage.setItem("articles",JSON.stringify(listOfArticles));
-      }
-      Swal.fire({
-        icon: 'success',
-        title: 'Agregado al Carrito',
-        timer: '1000',
-        showConfirmButton: 'false'
-      });
+      shopProduct();
     })
-
-
 })

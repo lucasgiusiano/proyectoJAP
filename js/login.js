@@ -1,4 +1,5 @@
-//Chequea que los datos ingresados por el ususario sean correctos y en caso de que lo sean realiza el log 
+//Chequea que los datos ingresados por el ususario sean correctos y en caso de que lo sean realiza el log
+//En caso de que alguno de los requerimientos no se cumpla lanza los mensajes correspondientes al usuario para que este pueda corregirlos
 function loginCheck() {
   let newUser = {name: "",secName:"", surname: "",secSurname:"",email:"",phoneNum: 0,password:"",image:""}
   let email = document.getElementById("email").value;

@@ -1,5 +1,6 @@
 let thisUser = JSON.parse(sessionStorage.getItem("user"))
 
+//Carga los datos que ya hayan sido guardados anteriormente en los inputs correspondientes para que el ususario pueda ver que informacion ha proporcionado o le falta por proporcionar
 function chargeInfoOfUser(){
     document.getElementById("nombre").value = thisUser.name;
     document.getElementById("sNombre").value = thisUser.secName;
@@ -14,6 +15,7 @@ function chargeInfoOfUser(){
 
  }
 
+ //Captura los datos ingresados en los inputs, los asigna a cada espacio en el objeto thisUser y actualiza el objeto guardado en el sessionStorage
  function saveChanges(){
     thisUser.name = document.getElementById("nombre").value;
     thisUser.secName = document.getElementById("sNombre").value;
@@ -27,6 +29,8 @@ function chargeInfoOfUser(){
     sessionStorage.setItem("user", JSON.stringify(thisUser));
  }
 
+ //Captura la imagen que el usuario haya insertado en el input correspondiente y la transforma en formato 64 para ahorrar espacio al guardarlo
+ //Luego la guarda en el atributo correspondiente que contiene el objeto en la variable thisUser
 function catchAndSaveImage(){
     let fileInput = document.getElementById("imagen").files[0];
     let reader = new FileReader();
@@ -42,7 +46,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     showUserOptions();
     chargeInfoOfUser();
 
-    document.getElementById("formPerfil").addEventListener("submit", ()=>{
+    document.getElementById("formPerfil").addEventListener("submit", (event)=>{
         if(!document.getElementById("formPerfil").checkValidity()){
             event.stopPropagation();
             event.preventDefault();

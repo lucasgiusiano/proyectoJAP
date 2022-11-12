@@ -23,16 +23,19 @@ function showUserOptions(){
 
   if (usuario != undefined){
     htmlContentSession = `
-    <a class="btn btn-secondary nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="nombreUsuario">${usuario.email}</a>
+    <a class="btn btn-primary fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="nombreUsuario">${usuario.email}</a>
     <ul class="dropdown-menu">
       <li><a role="button" class="dropdown-item" id="verCarrito" href="cart.html">Mi carrito</a></li>
       <li><a role="button" class="dropdown-item" id="verPerfil" href="my-profile.html">Mi perfil</a></li>
       <li><hr class="dropdown-divider"></li>
       <li><a role="button" class="dropdown-item" id="cerrarSesion" onclick="unlogUser()" href="login.html">Cerrar Sesión</a></li>
     </ul>`;
-
-    document.getElementById("perfil").innerHTML = htmlContentSession;
+  }else{
+    htmlContentSession = `<a class="btn btn-primary" href="login.html" role="button" id="iniciarSesion">Iniciar Sesion</a>
+    `
   }
+  
+  document.getElementById("perfil").innerHTML = htmlContentSession;
 }
 
 let showSpinner = function(){

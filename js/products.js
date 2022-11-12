@@ -9,6 +9,7 @@ function setProdID(id){
   window.location = "product-info.html"
 }
 
+//Recorre el array que le es pasado como por productArray y genera un tarjeta predeterminada para mostrarlo, luego agrega este codigo generado al html.
 function showProductsList(productArray) { 
   let htmlContentToAppend = "";
 
@@ -37,7 +38,7 @@ function showProductsList(productArray) {
   document.getElementById("product-list-container").innerHTML = htmlContentToAppend;
 }
 
-//Filtra los productos dependiendo de los valores ingresados en los inputs
+//Filtra los productos dependiendo de los valores ingresados en los inputs rangeFilterCountMinPrice y rangeFilterCountMaxPrice
 function filterByCount(){
   let min = document.getElementById("rangeFilterCountMinPrice").value;
   let max = document.getElementById("rangeFilterCountMaxPrice").value;

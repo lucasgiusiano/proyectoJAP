@@ -1,5 +1,6 @@
 let cartOfUser = {};
 
+//Busca y devuelve un articulo dentro del array de articulos del objeto cartOfUser a partir de una id especifica proporcionada
 function searcher(id){
     let searchedArticle = cartOfUser.articles.findIndex(article => article.id == id);
 
